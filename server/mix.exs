@@ -20,7 +20,7 @@ defmodule RoboTuber.MixProject do
 
   defp deps do
     [
-
+      {:riverside, "~> 2.1.0"}
     ]
   end
 end

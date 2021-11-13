@@ -1,0 +1,11 @@
+diagrams==0.18.0
+flatbuffers==2.0
+graphviz==0.13.2
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+numpy==1.21.4
+onnxruntime==1.9.0
+opencv-python==4.5.4.58
+Pillow==8.4.0
+protobuf==3.19.1
+websocket-client==1.2.1
