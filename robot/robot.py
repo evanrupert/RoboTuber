@@ -1,28 +1,20 @@
-import websocket
-import _thread
-import time
+from websocket_receiver import start
+import struct
+import serial
 
-def on_message(ws, message):
-  print(message)
+def handle_frame(ws, data):
+  right_eye = int.from_bytes(data[0:1], byteorder='big')
+  left_eye = int.from_bytes(data[1:2], byteorder='big')
 
-def on_error(ws, error):
-  print(error)
+  
+  #print("right eye read" + str(right_eye))
+  #print("left eye read" + str(left_eye))
 
-def on_close(ws, close_status_code, close_msg):
-  print("### closed ###")
+  return [ "R "+ str(right_eye)+"\n","L "+ str(left_eye) +"\n" ]
 
-def on_open(ws):
-  def run(*args):
-    print("Yo")
 
-if __name__ == "__main__":
-  websocket.enableTrace(True)
-  ws = websocket.WebSocketApp(
-    url="ws://localhost:3000/ws",
-    on_open=on_open,
-    on_message=on_message,
-    on_error=on_error,
-    on_close=on_close
-  )
+if __name__ == '__main__':
+  start(handle_frame)
 
-  ws.run_forever()
+
+  
