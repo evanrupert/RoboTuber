@@ -30,10 +30,13 @@ defmodule UDPServer do
 
     # TODO: Work on transforming and sending rest of data
     # TODO: Get raspberry pi setup with python code and make sure the frame data can be used by the servos
-    Riverside.LocalDelivery.deliver(
-      {:user, session.user_id},
-      {:binary, <<right_eye_open, left_eye_open>>}
-    )
+    if rem(frame, 24) == 0 do
+      IO.puts "Sending Frame #{frame}"
+      Riverside.LocalDelivery.deliver(
+        {:user, session.user_id},
+        {:binary, <<right_eye_open, left_eye_open>>}
+      )
+    end
 
     {:noreply, socket}
   end
